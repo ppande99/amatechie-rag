@@ -1,0 +1,1 @@
+{"id": "q1", "question": "How do we rotate the break-glass IAM role?", "relevant_sources": ["runbooks/break-glass.md"], "user_groups": ["sre"], "must_not_retrieve": ["policies/hr-confidential.md"]}

@@ -1,0 +1,12 @@
+# Apps call stable aliases; swapping the underlying model is a config change.
+model_list:
+  - model_name: chat-default
+    litellm_params:
+      model: os.environ/BEDROCK_CHAT_MODEL # e.g. bedrock/<inference-profile-or-model-id>
+  - model_name: embed-default
+    litellm_params:
+      model: os.environ/BEDROCK_EMBED_MODEL # bedrock/amazon.titan-embed-text-v2:0
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY # admin only; apps get virtual keys
+  database_url: os.environ/DATABASE_URL
