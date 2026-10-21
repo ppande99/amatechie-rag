@@ -8,8 +8,10 @@ Grounded knowledge assistant over internal documents: hybrid retrieval (pgvector
 cp .env.example .env        # fill in LITELLM_TAG and BEDROCK_CHAT_MODEL
 docker compose up -d db litellm
 uv sync
+uv run alembic upgrade head
+uv run python -m app.ingestion sample_docs --tenant demo --fake   # offline, free
 uv run uvicorn app.main:app --reload
-uv run pytest
+TEST_DATABASE_URL=postgresql+psycopg://app:app@localhost:5432/rag_test uv run pytest
 ```
 
 ## Roadmap (6-8 h/week)

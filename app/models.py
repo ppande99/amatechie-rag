@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import Computed, DateTime, ForeignKey, Index, String, Text, func
+from sqlalchemy import Computed, DateTime, ForeignKey, Index, String, Text, UniqueConstraint, func
 from sqlalchemy.dialects.postgresql import ARRAY, TSVECTOR, UUID
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
@@ -26,6 +26,8 @@ class Document(Base):
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))  # demo TTL
 
     chunks: Mapped[list["Chunk"]] = relationship(back_populates="document", cascade="all, delete")
+
+    __table_args__ = (UniqueConstraint("tenant_id", "source", name="uq_documents_tenant_source"),)
 
 
 class Chunk(Base):
