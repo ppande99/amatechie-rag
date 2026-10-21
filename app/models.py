@@ -35,7 +35,9 @@ class Chunk(Base):
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     document_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("documents.id", ondelete="CASCADE"))
-    tenant_id: Mapped[str] = mapped_column(String(64))  # denormalised so the filter is one index hit
+    tenant_id: Mapped[str] = mapped_column(
+        String(64)
+    )  # denormalised so the filter is one index hit
     ordinal: Mapped[int]
     text: Mapped[str] = mapped_column(Text)
     embedding: Mapped[list[float]] = mapped_column(Vector(settings.embed_dim))

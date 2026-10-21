@@ -26,7 +26,9 @@ async def ingest(
     for doc in docs:
         existing = (
             await session.execute(
-                select(Document).where(Document.tenant_id == tenant_id, Document.source == doc.source)
+                select(Document).where(
+                    Document.tenant_id == tenant_id, Document.source == doc.source
+                )
             )
         ).scalar_one_or_none()
 

@@ -1,6 +1,6 @@
 """Database tests need a Postgres with pgvector. Set TEST_DATABASE_URL to run them; otherwise skipped.
 
-    TEST_DATABASE_URL=postgresql+psycopg://app:app@localhost:5432/rag_test pytest
+TEST_DATABASE_URL=postgresql+psycopg://app:app@localhost:5432/rag_test pytest
 """
 
 import os

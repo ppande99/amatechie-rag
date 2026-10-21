@@ -54,5 +54,7 @@ def load_directory(root: Path) -> list[RawDoc]:
             continue
         groups, text = parse_front_matter(path.read_text(encoding="utf-8", errors="replace"))
         if text.strip():
-            docs.append(RawDoc(source=path.relative_to(root).as_posix(), text=text, allowed_groups=groups))
+            docs.append(
+                RawDoc(source=path.relative_to(root).as_posix(), text=text, allowed_groups=groups)
+            )
     return docs

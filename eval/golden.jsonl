@@ -1,0 +1,14 @@
+{"id":"g01","question":"How do I rotate the break-glass IAM role?","relevant_sources":["runbooks/break-glass.md"],"user_groups":["sre"]}
+{"id":"g02","question":"How often should break-glass credentials be rotated?","relevant_sources":["runbooks/break-glass.md"],"user_groups":["sre"]}
+{"id":"g03","question":"What do I do when the primary database is unhealthy?","relevant_sources":["runbooks/database-failover.md"],"user_groups":["sre"]}
+{"id":"g04","question":"Why did my ACM certificate fail to renew?","relevant_sources":["runbooks/certificate-renewal.md"],"user_groups":[]}
+{"id":"g05","question":"CPU is above 85 percent on an ECS service, what should I check?","relevant_sources":["runbooks/high-cpu-alert.md"],"user_groups":["platform"]}
+{"id":"g06","question":"Who runs the incident and how often are updates posted during a Sev1?","relevant_sources":["policies/incident-response.md"],"user_groups":[]}
+{"id":"g07","question":"How long do we keep backups?","relevant_sources":["policies/data-retention.md"],"user_groups":["compliance"]}
+{"id":"g08","question":"What happens when privileged access is not re-approved?","relevant_sources":["policies/access-review.md"],"user_groups":["security"]}
+{"id":"g09","question":"My VPN keeps disconnecting every few minutes","relevant_sources":["wiki/vpn-setup.md"],"user_groups":[]}
+{"id":"g10","question":"What is the daily meal allowance when travelling?","relevant_sources":["wiki/expense-reports.md"],"user_groups":[]}
+{"id":"g11","question":"What are the engineering salary bands?","relevant_sources":["policies/hr-confidential.md"],"user_groups":["hr"]}
+{"id":"g12","question":"What are the engineering salary bands?","relevant_sources":[],"user_groups":["sre"],"must_not_retrieve":["policies/hr-confidential.md"]}
+{"id":"g13","question":"How do I rotate the break-glass IAM role?","relevant_sources":[],"user_groups":[],"must_not_retrieve":["runbooks/break-glass.md"]}
+{"id":"g14","question":"Quarterly access review evidence for the audit","relevant_sources":[],"user_groups":["sre"],"must_not_retrieve":["policies/access-review.md"]}
