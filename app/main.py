@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="fde-rag")
+app = FastAPI(title="amatechie-rag")
 
 
 @app.get("/health")

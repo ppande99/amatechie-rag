@@ -1,4 +1,4 @@
-# fde-rag
+# amatechie-rag
 
 Grounded knowledge assistant over internal documents: hybrid retrieval (pgvector + full-text), reranking, per-user access scoping, citations, and an eval gate.
 

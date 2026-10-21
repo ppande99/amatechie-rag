@@ -1,5 +1,5 @@
 [project]
-name = "fde-rag"
+name = "amatechie-rag"
 version = "0.1.0"
 description = "Grounded knowledge assistant: hybrid retrieval, access scoping, citations, eval gate"
 requires-python = ">=3.12"
