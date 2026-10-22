@@ -1,0 +1,20 @@
+[
+  {
+    "id": "KI-104",
+    "title": "CSV export drops custom-field columns",
+    "status": "open",
+    "workaround": "Export as XLSX"
+  },
+  {
+    "id": "KI-117",
+    "title": "Calendar sync shifts events by one hour after DST change",
+    "status": "open",
+    "workaround": "Re-select time zone in Settings > Calendar"
+  },
+  {
+    "id": "KI-130",
+    "title": "Sync service degraded: 502 errors for some workspaces",
+    "status": "investigating",
+    "started": "2026-10-19T14:05:00Z"
+  }
+]
