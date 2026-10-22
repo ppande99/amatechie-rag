@@ -1,6 +1,6 @@
 """Retrieval harness. Run before and after every retrieval change; the numbers are the point.
 
-    python -m eval.retrieval_eval --golden eval/golden.jsonl --tenant demo [--fake] [--k 5]
+    python -m eval.retrieval_eval --golden eval/golden.jsonl --tenant demo [--embedder fake|bedrock|gateway] [--k 5]
 
 Reports recall@k and MRR (measured at document level, since chunk ids change on re-ingest) and
 counts access violations: any retrieved source listed in a case's `must_not_retrieve`. Violations
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 from app.db import SessionLocal
-from app.ingestion.embedder import Embedder, FakeEmbedder, GatewayEmbedder
+from app.ingestion.embedder import Embedder, make_embedder
 from app.retrieval.search import hybrid_search
 from eval.metrics import mean, recall_at_k, reciprocal_rank
 
@@ -72,13 +72,13 @@ async def main() -> int:
     parser.add_argument("--golden", type=Path, default=Path("eval/golden.jsonl"))
     parser.add_argument("--tenant", default="demo")
     parser.add_argument("--k", type=int, default=5)
-    parser.add_argument("--fake", action="store_true")
+    parser.add_argument("--embedder", choices=["fake", "bedrock", "gateway"], default="gateway")
     parser.add_argument("--min-recall", type=float, default=0.0)
     parser.add_argument("--min-mrr", type=float, default=0.0)
     args = parser.parse_args()
 
     golden = [json.loads(line) for line in args.golden.read_text().splitlines() if line.strip()]
-    embedder = FakeEmbedder() if args.fake else GatewayEmbedder()
+    embedder = make_embedder(args.embedder)
     report = await run(golden, embedder, args.tenant, args.k)
     print(json.dumps(report, indent=2))
 
