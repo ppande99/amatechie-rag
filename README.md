@@ -6,8 +6,9 @@ Grounded knowledge assistant over internal documents: hybrid retrieval (pgvector
 
 ```bash
 cp .env.example .env        # fill in LITELLM_TAG and BEDROCK_CHAT_MODEL
-docker compose up -d db litellm
-uv sync
+docker compose up -d db                        # database only
+# docker compose --profile gateway up -d        # later: also start the LiteLLM gateway
+uv sync                     # or: pip install -e ".[aws]"
 uv run alembic upgrade head
 uv run python -m app.ingestion sample_docs --tenant demo --embedder fake      # offline, free
 uv run python -m app.ingestion sample_docs --tenant demo --embedder bedrock   # real Titan embeddings (AWS creds)

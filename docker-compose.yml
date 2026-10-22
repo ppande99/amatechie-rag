@@ -13,18 +13,19 @@ services:
       retries: 10
 
   litellm:
+    profiles: ["gateway"]   # not started by `docker compose up -d db`; use --profile gateway
     # Pin by digest before deploying anywhere real; do not track a floating tag.
-    image: ghcr.io/berriai/litellm:${LITELLM_TAG:?set LITELLM_TAG in .env}
+    image: ghcr.io/berriai/litellm:${LITELLM_TAG:-pin-a-reviewed-release}
     command: ["--config", "/app/config.yaml", "--port", "4000"]
     environment:
-      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?set in .env}
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:-}
       DATABASE_URL: postgresql://app:app@db:5432/litellm
       AWS_REGION_NAME: ${AWS_REGION:-us-east-1}
       AWS_PROFILE: ${AWS_PROFILE:-default}
-      BEDROCK_CHAT_MODEL: ${BEDROCK_CHAT_MODEL:?set in .env}
+      BEDROCK_CHAT_MODEL: ${BEDROCK_CHAT_MODEL:-}
       BEDROCK_EMBED_MODEL: ${BEDROCK_EMBED_MODEL:-amazon.titan-embed-text-v2:0}
     volumes:
-      - ./litellm/config.yaml:/app/config.yaml:ro
+      - ./gateway/config.yaml:/app/config.yaml:ro
       - ~/.aws:/root/.aws:ro # local dev only; deployed gateway uses its task IAM role
     ports: ["4000:4000"]
     depends_on:
