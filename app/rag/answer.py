@@ -45,6 +45,7 @@ class Answer:
     refused: bool
     reason: str | None = None  # "no_context" | "model_refused" | "ungrounded"
     citations: list[Citation] = field(default_factory=list)
+    passages: list[str] = field(default_factory=list)  # what the model saw; used by evals
 
 
 def build_prompt(question: str, hits: list[Hit]) -> str:
@@ -91,10 +92,11 @@ async def answer_question(
 
     text = (await chat.chat(SYSTEM_PROMPT, build_prompt(question, hits))).strip()
 
+    passages = [h.text for h in hits]
     if text.startswith(REFUSAL):
-        return Answer(REFUSAL, refused=True, reason="model_refused")
+        return Answer(REFUSAL, refused=True, reason="model_refused", passages=passages)
 
     citations = extract_citations(text, hits)
     if not citations:
-        return Answer(REFUSAL, refused=True, reason="ungrounded")
-    return Answer(text, refused=False, citations=citations)
+        return Answer(REFUSAL, refused=True, reason="ungrounded", passages=passages)
+    return Answer(text, refused=False, citations=citations, passages=passages)
